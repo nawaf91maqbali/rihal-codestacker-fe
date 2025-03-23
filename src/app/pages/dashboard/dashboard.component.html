@@ -1,0 +1,3 @@
+<app-map [crimesArray]="crimesArray" (reportCrime)="reportCrime()"></app-map>
+<app-add [isVisible]="isVisible" [onSubmitSuccess]="onSubmitSuccess" (closeReportCrime)="closeReportCrime()"></app-add>
+<app-filter (onCrimeTypesFilter)="onCrimeTypeFilterClick($event)"></app-filter>

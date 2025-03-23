@@ -1,0 +1,43 @@
+<!-- <div id="popup" class="popup"> -->
+    <!-- <div>
+        <span>Details: </span>
+        <span id="details" class="details"></span>
+    </div>
+    <div>
+        <span>Type: </span>
+        <span id="type" class="type"></span>
+    </div>
+    <div>
+        <span>Date & Time: </span>
+        <span id="datetime" class="datetime"></span>
+    </div>
+    <div>
+        <span>Status: </span>
+        <span id="status" class="status"></span>
+    </div> -->
+    <nz-alert [nzMessage]="messageTemplate" [nzDescription]="descriptionTemplate"
+        [nzAction]="actionTemplate" id="popup" class="popup" />
+    <ng-template #messageTemplate>
+        <nz-icon nzType="info-circle" nzTheme="outline" />
+        &nbsp;
+        <span style="font-size: 14px;">
+            <span id="type" class="type"></span> Report
+        </span>
+    </ng-template>
+    <ng-template #descriptionTemplate>
+        <nz-descriptions nzSize="small">
+            <nz-descriptions-item nzTitle="Details" [nzSpan]="3">
+                <span id="details" class="details"></span>
+            </nz-descriptions-item>
+            <nz-descriptions-item nzTitle="Date & Time">
+                <span id="datetime" class="datetime"></span>
+            </nz-descriptions-item>
+        </nz-descriptions>
+    </ng-template>
+    <ng-template #actionTemplate>
+        <nz-ribbon [nzText]="textTemplate" style="font-size: 14px;"/>
+        <ng-template #textTemplate>
+            <span id="status" class="status" style="font-size: 14px;"></span>
+        </ng-template>
+    </ng-template>
+<!-- </div> -->

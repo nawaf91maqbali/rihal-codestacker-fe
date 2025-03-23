@@ -1,0 +1,29 @@
+<nz-drawer [nzClosable]="false" [nzVisible]="isVisble" nzPlacement="right" nzTitle="Report Filter"
+    (nzOnClose)="isVisble = false">
+    <ng-container *nzDrawerContent>
+        <nz-divider nzText="Search" nzOrientation="left" />
+        <nz-row [nzGutter]="8">
+            <nz-col nzSpan="24" style="margin-bottom: 5px;">
+                <nz-input-group [nzSuffix]="suffixIconSearch">
+                    <input type="text" nz-input placeholder="Search......" (input)="onInputChanged($event)" />
+                </nz-input-group>
+                <ng-template #suffixIconSearch>
+                    <nz-icon nzType="search" />
+                </ng-template>
+            </nz-col>
+        </nz-row>
+        <nz-divider nzText="Crimes Type" nzOrientation="left" />
+        <nz-row [nzGutter]="8">
+            @for (crimeType of crimeTypes; track $index) {
+            <nz-col nzXs="12" nzSm="12" nzMd="12" nzLg="12" nzXl="12" nzXXl="12" style="margin-bottom: 5px;">
+                <button nz-button nzShape="circle" nzType="primary" nzSize="small"
+                    [nzDanger]="crimeTypesFilter.includes(crimeType)" (click)="onCrimeTypeFilterClick(crimeType)">
+                    <nz-icon [nzType]="!crimeTypesFilter.includes(crimeType)? 'eye' : 'eye-invisible'"
+                        nzTheme="outline" />
+                </button>
+                <span style="margin-left: 3px;">{{crimeType}}</span>
+            </nz-col>
+            }
+        </nz-row>
+    </ng-container>
+</nz-drawer>

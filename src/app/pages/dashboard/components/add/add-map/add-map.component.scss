@@ -1,0 +1,12 @@
+.add-map {
+  width: 100%;
+  height: 400px;
+  padding: auto;
+}
+
+/* Reduce height to 250px on small devices (max-width: 600px) */
+@media (max-width: 600px) {
+  .add-map {
+      height: 250px;
+  }
+}

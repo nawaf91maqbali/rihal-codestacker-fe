@@ -1,0 +1,65 @@
+<nz-modal [nzVisible]="isVisible" nzTitle="Report Crime" [nzClosable]="false" [nzWidth]="800">
+    <ng-container *nzModalContent>
+        <nz-steps>
+            <nz-step nzTitle="Report Info" nzIcon="form"
+                [nzStatus]="current === 0 ? 'process' : (!crimeForm.valid && current == 1 ? 'error' : 'finish')"
+                [nzDescription]="current === 1 && !crimeForm.valid? 'All filds required' : ''" />
+            <nz-step nzTitle="Select Location" nzIcon="global"
+                [nzStatus]="current < 1 ? 'wait' : (current === 1? 'process' : 'finish')" />
+            <nz-step nzTitle="Finsh" nzIcon="check-circle" [nzStatus]="current == 2? 'finish' : 'wait'" />
+        </nz-steps>
+        <br />
+        <form nz-form title="Report Crime" [formGroup]="crimeForm" (ngSubmit)="onSubmit()">
+            @if(current == 0){
+            <nz-form-item>
+                <nz-form-label [nzSpan]="4" nzRequired style="text-align: left;">Report Detials</nz-form-label>
+                <nz-form-control [nzSpan]="20" nzHasFeedback nzValidatingTip="Validating..."
+                    [nzErrorTip]="detailsErrorTpl">
+                    <textarea formControlName="details" nz-input rows="4" placeholder="Report Details"></textarea>
+                    <ng-template #detailsErrorTpl let-control>
+                        @if (control.errors?.['required']) {
+                        Report details required!
+                        }
+                    </ng-template>
+                </nz-form-control>
+            </nz-form-item>
+            <nz-form-item>
+                <nz-form-label [nzSpan]="4" nzRequired style="text-align: left;">Crime Type</nz-form-label>
+                <nz-form-control [nzSpan]="20" [nzErrorTip]="typeErrorTpl">
+                    <nz-select formControlName="type" nzPlaceHolder="Select Crime Type">
+                        @for (type of crimeTypes; track $index) {
+                        <nz-option [nzValue]="type" nzLabel="{{type}}"></nz-option>
+                        }
+                    </nz-select>
+                    <ng-template #typeErrorTpl let-control>
+                        @if (control.errors?.['required']) {
+                        Report details required!
+                        }
+                    </ng-template>
+                </nz-form-control>
+            </nz-form-item>
+            }
+            @else if (current == 1) {
+            <app-add-map (getLatLong)="getLatLong($event)"></app-add-map>
+            }
+            @else if (current == 2) {
+            <nz-result nzStatus="success" nzTitle="Report Raised"
+                nzSubTitle="Your report has been successfully received, it will be processed ASAP" />
+            }
+
+        </form>
+
+    </ng-container>
+    <ng-container *nzModalFooter>
+        @if(current == 0){
+        <button nz-button nzType="primary" (click)="next()">Next</button>
+        }
+        @else if (current == 1) {
+        <button nz-button nzType="primary" (click)="pre()">Previous</button>
+        <button nz-button nzType="primary"
+            [disabled]="!crimeForm.valid || (crimeForm.value.latitude === 0 || crimeForm.value.longitude === 0)"
+            (click)="onSubmitClick()">Confirm</button>
+        }
+        <button nz-button nzType="primary" nzDanger (click)="onClose()">Close</button>
+    </ng-container>
+</nz-modal>
