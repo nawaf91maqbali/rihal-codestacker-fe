@@ -13,6 +13,7 @@ import { NzStepsModule } from 'ng-zorro-antd/steps';
 import { NzResultModule } from 'ng-zorro-antd/result';
 import { AddMapComponent } from "./add-map/add-map.component";
 import { NzMessageService } from 'ng-zorro-antd/message';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-add',
@@ -25,6 +26,7 @@ export class AddComponent {
   crimeForm: FormGroup = new FormGroup({
     details: new FormControl('', Validators.required),
     type: new FormControl('', Validators.required),
+    national_id: new FormControl('', [Validators.required, Validators.pattern('^[0-9]*$')]),
     latitude: new FormControl(0),
     longitude: new FormControl(0)
   });
@@ -53,7 +55,8 @@ export class AddComponent {
       const crimeData: Crime = {
         report_details: this.crimeForm.value.details,
         crime_type: this.crimeForm.value.type,
-        report_date_time: new Date(),
+        national_id: this.crimeForm.value.national_id,
+        report_date_time: (new DatePipe('en-US')).transform(new Date(), 'YYYY-MM-dd-HH-mm', 'GMT+4') || '',
         report_status: ReportStatus.Pending,
         latitude: this.crimeForm.value.latitude,
         longitude: this.crimeForm.value.longitude

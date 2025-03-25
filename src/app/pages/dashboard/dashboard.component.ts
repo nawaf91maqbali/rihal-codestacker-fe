@@ -1,12 +1,11 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { CrimeService } from '../../services/crime.service';
-import { Crime, CrimeFilter } from '../../model/crime';
+import { Crime } from '../../model/crime';
 import { AddComponent } from "./components/add/add.component";
 import { NzModalModule } from 'ng-zorro-antd/modal';
 import { MapComponent } from "./components/map/map.component";
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { CrimeType } from '../../enums/crime-type';
-import { filter } from 'rxjs';
 import { FilterComponent } from "./components/filter/filter.component";
 
 @Component({
@@ -20,7 +19,9 @@ export class DashboardComponent implements OnInit {
   crimesArray: Crime[] = [];
   isVisible: boolean = false;
   crimeTypesFilter: CrimeType[] = [];
-  searchValue: string = 'theft';
+  searchById!: string;
+  dateSearch: string = '';
+
 
   constructor(private crimesService: CrimeService, private messageService: NzMessageService) {
 
@@ -33,13 +34,11 @@ export class DashboardComponent implements OnInit {
   loadCrimes(): void {
     this.crimesService.getCrimes().subscribe({
       next: (response) => {
-        this.crimesArray = response.filter(c => !this.crimeTypesFilter.includes(c.crime_type as CrimeType))
-        .filter(c => this.applyFilter(c)
-          // // (c.id?.toString().includes(this.searchValue) || 
-          //  c.report_date_time?.toISOString().includes(this.searchValue) || 
-          //  c.crime_type?.toLowerCase().includes(this.searchValue.toLowerCase())
-          // // )
-        )
+        this.crimesArray = response
+        .filter(c => !this.crimeTypesFilter.includes(c.crime_type))
+        .filter(c => c.national_id.toString().includes(this.searchById) || !this.searchById)
+        .filter(c => (c.report_date_time && c.report_date_time.includes(this.dateSearch)) || !this.dateSearch);
+        console.log(this.dateSearch);
         this.mapComponent.reloadMarkers(this.crimesArray);
       },
       error: (error) => {
@@ -66,23 +65,16 @@ export class DashboardComponent implements OnInit {
 
   onCrimeTypeFilterClick(crimeTypes: CrimeType[]) {
     this.crimeTypesFilter = crimeTypes;
-    console.log(crimeTypes);
     this.loadCrimes();
   }
 
-  onSearchFilter(searchText: string) {
-
+  onSearchFilterById(searchByIdText: string) {
+    this.searchById = searchByIdText;
+    this.loadCrimes();
   }
 
-  applyFilter(crime: Crime): boolean {
-    if (!this.searchValue) return true; // Show all if searchValue is empty
-  
-    const search = this.searchValue.toLowerCase();
-  
-    return (
-      crime.crime_type?.toLowerCase().includes(search) //||
-      //crime.report_date_time?.toISOString().includes(search) //||
-      //(crime.id ? crime.id.toString().includes(this.searchValue) : false) // Allows partial match for id
-    );
+  onDateFilter(dateStr: string) {
+    this.dateSearch = dateStr;
+    this.loadCrimes();
   }
 }

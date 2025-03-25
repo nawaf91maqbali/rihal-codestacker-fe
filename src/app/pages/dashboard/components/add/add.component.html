@@ -33,7 +33,21 @@
                     </nz-select>
                     <ng-template #typeErrorTpl let-control>
                         @if (control.errors?.['required']) {
-                        Report details required!
+                        Crime type required!
+                        }
+                    </ng-template>
+                </nz-form-control>
+            </nz-form-item>
+            <nz-form-item>
+                <nz-form-label [nzSpan]="4" nzRequired style="text-align: left;">National Id</nz-form-label>
+                <nz-form-control [nzSpan]="20" nzHasFeedback nzValidatingTip="Validating..."
+                    [nzErrorTip]="nationalIdErrorTpl">
+                    <input nz-input formControlName="national_id" placeholder="National Id">
+                    <ng-template #nationalIdErrorTpl let-control>
+                        @if (control.errors?.['required']) {
+                        National ID is required!
+                        }@else if(control.errors?.['pattern']){
+                        Only numbers are allowed!
                         }
                     </ng-template>
                 </nz-form-control>

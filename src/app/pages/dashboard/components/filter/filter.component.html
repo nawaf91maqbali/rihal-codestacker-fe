@@ -1,18 +1,25 @@
-<nz-drawer [nzClosable]="false" [nzVisible]="isVisble" nzPlacement="right" nzTitle="Report Filter"
-    (nzOnClose)="isVisble = false">
+<nz-drawer [nzClosable]="true" [nzVisible]="isVisble" nzPlacement="right" nzTitle="Report Filter"
+    (nzOnClose)="onOpenCloseDrawer()">
     <ng-container *nzDrawerContent>
-        <nz-divider nzText="Search" nzOrientation="left" />
+        <nz-divider nzText="Filter By Id" nzOrientation="left" />
         <nz-row [nzGutter]="8">
             <nz-col nzSpan="24" style="margin-bottom: 5px;">
                 <nz-input-group [nzSuffix]="suffixIconSearch">
-                    <input type="text" nz-input placeholder="Search......" (input)="onInputChanged($event)" />
+                    <input type="text" nz-input placeholder="Enter National Id" (input)="onInputChanged($event)" />
                 </nz-input-group>
                 <ng-template #suffixIconSearch>
                     <nz-icon nzType="search" />
                 </ng-template>
             </nz-col>
         </nz-row>
-        <nz-divider nzText="Crimes Type" nzOrientation="left" />
+        <nz-divider nzText="Filter By Date" nzOrientation="left" />
+        <nz-row [nzGutter]="8">
+            <nz-col nzSpan="24" style="margin-bottom: 5px;">
+                <nz-date-picker [(ngModel)]="date" (ngModelChange)="onDateChange($event)"
+                    style="width: 100%;"></nz-date-picker>
+            </nz-col>
+        </nz-row>
+        <nz-divider nzText="Filter By Crimes Type" nzOrientation="left" />
         <nz-row [nzGutter]="8">
             @for (crimeType of crimeTypes; track $index) {
             <nz-col nzXs="12" nzSm="12" nzMd="12" nzLg="12" nzXl="12" nzXXl="12" style="margin-bottom: 5px;">
@@ -27,3 +34,14 @@
         </nz-row>
     </ng-container>
 </nz-drawer>
+
+
+<nz-float-button nzType="primary" [nzIcon]="searchIcon" (nzOnClick)="onOpenCloseDrawer()"></nz-float-button>
+<ng-template #searchIcon>
+    <nz-icon nzType="search" nzTheme="outline" class="nz-icon"></nz-icon>
+</ng-template>
+
+<button nz-button nzType="primary" nzShape="round" class="nz-button" (click)="onOpenCloseDrawer()">
+    <nz-icon nzType="search" nzTheme="outline" class="nz-icon"></nz-icon>
+    <span>Search</span>
+</button>

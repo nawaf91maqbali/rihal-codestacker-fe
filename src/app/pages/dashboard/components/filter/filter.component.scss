@@ -1,0 +1,33 @@
+nz-float-button {
+    display: none;
+    position: fixed;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    z-index: 1000;
+}
+
+.nz-button {
+    position: fixed;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    z-index: 1000;
+}
+
+// .nz-icon {
+//     font-size: 22px;
+// }
+
+/* small devices (max-width: 600px) */
+@media (max-width: 600px) {
+    nz-float-button {
+        display: block;
+    }
+
+    .nz-button{
+        display: none;
+    }
+}
