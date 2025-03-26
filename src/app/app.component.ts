@@ -7,5 +7,7 @@ import { LayoutComponent } from './shared/layout/layout.component';
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
+
+//main app componet
 export class AppComponent {
 }

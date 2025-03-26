@@ -16,7 +16,10 @@ import { Icon, Style } from 'ol/style';
   templateUrl: './add-map.component.html',
   styleUrl: './add-map.component.scss'
 })
+
+//Add Map component
 export class AddMapComponent implements OnInit {
+  //used to send data to parent componet
   @Output() getLatLong = new EventEmitter<number[]>();
   map: Map = new Map(); // Initialize with a default value
   baseLayer!: TileLayer; // Base layer for light/dark theme
@@ -24,6 +27,7 @@ export class AddMapComponent implements OnInit {
   vectorLayer!: VectorLayer;
 
   ngOnInit(): void {
+    //initalize the map on ui
     this.initializeMap();
   }
 
@@ -54,12 +58,15 @@ export class AddMapComponent implements OnInit {
       this.map.on('click', (event) => {
         const coordinates = toLonLat(event.coordinate);
 
+        //send cooordinates to parent component
         this.getLatLong.emit(coordinates);
+        //set mark pin on the map
         this.setMarkerOnMap(coordinates)
       });
     }
   }
 
+  //call to set marker pin on the map
   setMarkerOnMap(coordinates: number[]) {
     if (coordinates[0] > 0 && coordinates[1] > 0) {
       if (!this.vectorLayer) {

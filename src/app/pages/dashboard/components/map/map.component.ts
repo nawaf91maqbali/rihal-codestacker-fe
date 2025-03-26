@@ -14,7 +14,7 @@ import { PopupComponent } from '../popup/popup.component';
 import { Crime } from '../../../../model/crime';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzIconModule } from 'ng-zorro-antd/icon';
-import { CrimeType } from '../../../../enums/crime-type';
+import { CrimeType } from '../../../../enums/enums';
 
 @Component({
   selector: 'app-map',
@@ -22,21 +22,24 @@ import { CrimeType } from '../../../../enums/crime-type';
   templateUrl: './map.component.html',
   styleUrl: './map.component.scss'
 })
+
+//map component
 export class MapComponent {
   @Output() reportCrime = new EventEmitter<void>();
-  @Input() id: string = "map";
-  @Input() crimesArray: Crime[] = [];
+  @Input() crimesArray: Crime[] = []; //lsit of crime to display on map
   map: Map = new Map(); // Initialize with a default value
-  popup!: Overlay;
-  baseLayer!: TileLayer; // Base layer for light/dark theme
+  popup!: Overlay; // 
+  baseLayer!: TileLayer;
   vectorSource!: VectorSource;
   vectorLayer!: VectorLayer;
 
   ngOnInit(): void {
+    //load initial map
     this.initializeMap();
   }
 
 
+  //call to initalize map component on the page
   initializeMap(): void {
     // Use the provided ArcGIS World Street Map tile source
     const tileLayer = new TileLayer({
@@ -48,7 +51,7 @@ export class MapComponent {
 
     // Create the map with the tile layer and no controls
     this.map = new Map({
-      target: this.id,
+      target: 'map',
       layers: [
         tileLayer, // Use the ArcGIS World Street Map tile layer
       ],
@@ -61,8 +64,10 @@ export class MapComponent {
     this.setMarkers();
   }
 
+  //call the set markers pin on the map
   setMarkers() {
     //add markers on the map
+    //check if there's a crimes to load
     if (this.crimesArray.length > 0) {
 
       if (!this.vectorLayer) {
@@ -80,7 +85,7 @@ export class MapComponent {
       // Clear previous markers (if needed)
       this.vectorSource.clear();
 
-      // Define marker data (coordinates, title, and description)
+      //loop through the crimes array to get details
       this.crimesArray.forEach(crime => {
         const feature = new Feature({
           geometry: new Point(fromLonLat([crime.longitude, crime.latitude])),
@@ -91,7 +96,7 @@ export class MapComponent {
         });
         feature.setStyle(new Style({
           image: new Icon({
-            //src: 'https://openlayers.org/en/latest/examples/data/icon.png',
+            //load pin image each crime type with a specific image/icon
             src: `/${crime.crime_type === CrimeType.Assault ? 'blue-pin'
               : crime.crime_type === CrimeType.Homicide ? 'green-pin'
                 : crime.crime_type === CrimeType.Kidnapping ? 'red-pin'
@@ -113,6 +118,7 @@ export class MapComponent {
       this.map.addOverlay(this.popup);
 
       // Add a pointermove event listener to the map
+      //display popup when hover
       this.map.on('pointermove', (event) => {
         const feature = this.map.forEachFeatureAtPixel(event.pixel, (feature) => {
           return feature;
@@ -129,6 +135,8 @@ export class MapComponent {
 
       });
 
+      // Add a click event listener to the map
+      //display popup when click
       this.map.on('click', (event) => {
         const feature = this.map.forEachFeatureAtPixel(event.pixel, (feature) => {
           return feature;
@@ -152,6 +160,7 @@ export class MapComponent {
     }
   }
 
+  //call to load popup details
   setPopupValues(feature: FeatureLike, popup: Overlay) {
     const details = feature.get('details');
     const type = feature.get('type');
@@ -186,6 +195,7 @@ export class MapComponent {
     }
   }
 
+  //call when need to update pins on the map
   reloadMarkers(updateCrimes: Crime[]) {
     this.crimesArray = updateCrimes;
     this.setMarkers();

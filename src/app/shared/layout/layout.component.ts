@@ -10,6 +10,9 @@ import { NzMenuModule } from 'ng-zorro-antd/menu';
   templateUrl: './layout.component.html',
   styleUrl: './layout.component.scss'
 })
+
+//shared layout component over all pages
+//specify header of pages, menu, content and all other shared layout
 export class LayoutComponent {
   isCollapsed = false;
 }

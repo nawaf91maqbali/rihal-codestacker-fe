@@ -1,9 +1,31 @@
 .popup {
-    min-width: 300px;
+    min-width: 250px;
     position: absolute;
     display: none;
+    padding: 0;
   }
+
+.details-date {
+  width: 100%; 
+  text-align: center; 
+  align-items: center;
+}
+
+.font-style {
+  font-size: 14px;
+}
   
   .popup.visible {
     display: block;
   }
+
+//   /* small devices (max-width: 600px) */
+@media (max-width: 600px) {
+  .popup {
+    min-width: 220px;
+  }
+
+  .font-style{
+    font-size: 12px;
+  }
+}

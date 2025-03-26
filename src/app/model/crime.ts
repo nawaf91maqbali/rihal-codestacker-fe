@@ -1,6 +1,6 @@
-import { CrimeType } from "../enums/crime-type";
-import { ReportStatus } from "../enums/report-status";
+import { CrimeType, ReportStatus } from "../enums/enums";
 
+//Crime model to interact with api end point
 export interface Crime {
     id?: number;
     national_id: number;
