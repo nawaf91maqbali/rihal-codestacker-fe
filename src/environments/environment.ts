@@ -1,4 +1,4 @@
 //specify env variables for production
 export const environment = {
-    ApiUrl: "http://localhost:3080/"
+    ApiUrl: "http://localhost:3333/"
 };
