@@ -1,3 +1,7 @@
+.nz-drawer-style {
+    width: 378px;
+}
+
 nz-float-button {
     display: none;
     position: fixed;
@@ -19,6 +23,10 @@ nz-float-button {
 
 /* small devices (max-width: 600px) */
 @media (max-width: 600px) {
+    .nz-drawer-style {
+        width: 100px;
+    }
+
     nz-float-button {
         display: block;
     }
