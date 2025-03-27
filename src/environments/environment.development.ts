@@ -1,4 +1,4 @@
 //specify env variables for development
 export const environment = {
-    ApiUrl: "http://localhost:3000/"
+    ApiUrl: "https://crs-api-9ow4.onrender.com/api/"
 };

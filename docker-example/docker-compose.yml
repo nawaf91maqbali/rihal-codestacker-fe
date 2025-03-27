@@ -10,36 +10,6 @@ services:
     restart: always
     ports:
       - "4100:4100"
-    
-  crs_db:
-    image: postgres:latest
-    container_name: crs_db
-    restart: always
-    environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: password
-      POSTGRES_DB: postgres
-    volumes:
-      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U postgres"]
-      interval: 10s
-      retries: 5
-      start_period: 10s
-
-  crs_api:
-    image: postgrest/postgrest
-    container_name: crs_api
-    restart: always
-    ports:
-      - "3333:3000"
-    depends_on:
-      crs_db:
-        condition: service_healthy
-    environment:
-      PGRST_DB_URI: postgres://postgres:password@crs_db:5432/postgres
-      PGRST_DB_SCHEMAS: public
-      PGRST_DB_ANON_ROLE: postgres
 
 networks:
   default:
