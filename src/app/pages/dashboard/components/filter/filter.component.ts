@@ -10,6 +10,7 @@ import { FormsModule } from '@angular/forms';
 import { DatePipe } from '@angular/common';
 import { NzFloatButtonModule } from 'ng-zorro-antd/float-button';
 import { CrimeType } from '../../../../enums/enums';
+import { V } from 'ol/renderer/webgl/FlowLayer';
 
 @Component({
   selector: 'app-filter',
@@ -30,6 +31,7 @@ export class FilterComponent {
   @Output() onDateFilter = new EventEmitter<string>();
   crimeTypes = Object.values(CrimeType);
   crimeTypesFilter: CrimeType[] = [];
+  searchById!: string;
   date!: Date;
 
   //call when the crime type click on UI
@@ -46,12 +48,14 @@ export class FilterComponent {
   //call when the search by national id input changed
   onInputChanged(event: Event) {
     const value = (event.target as HTMLInputElement).value;
+    this.searchById = value;
     //update parent with new value
     this.onSearchFilterById.emit(value);
   }
 
   //call when the search by date input changed
   onDateChange(value: Date): void {
+    this.date = value;
     const dateStr = new DatePipe("en-US").transform(value, 'YYYY-MM-dd')?? '';
     //update parent with new value
     this.onDateFilter.emit(dateStr);

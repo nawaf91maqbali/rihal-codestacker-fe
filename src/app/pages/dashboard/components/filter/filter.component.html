@@ -5,7 +5,7 @@
         <nz-row [nzGutter]="8">
             <nz-col nzSpan="24" style="margin-bottom: 5px;">
                 <nz-input-group [nzSuffix]="suffixIconSearch">
-                    <input type="text" nz-input placeholder="Enter National Id" (input)="onInputChanged($event)" />
+                    <input type="text" nz-input [(ngModel)]="searchById" placeholder="Enter National Id" (input)="onInputChanged($event)" />
                 </nz-input-group>
                 <ng-template #suffixIconSearch>
                     <nz-icon nzType="search" />

@@ -38,12 +38,12 @@ export class DashboardComponent implements OnInit {
     this.crimesService.getCrimes().subscribe({
       next: (response) => {
         this.crimesArray = response
-        //filter by crime type
-        .filter(c => !this.crimeTypesFilter.includes(c.crime_type))
-        //filter by national id
-        .filter(c => c.national_id.toString().includes(this.searchById) || !this.searchById)
-        //filter by report date
-        .filter(c => (c.report_date_time && c.report_date_time.includes(this.dateSearch)) || !this.dateSearch);
+          //filter by crime type
+          .filter(c => !this.crimeTypesFilter.includes(c.crime_type))
+          //filter by national id
+          .filter(c => c.national_id.toString().includes(this.searchById) || !this.searchById)
+          //filter by report date
+          .filter(c => (c.report_date_time && c.report_date_time.includes(this.dateSearch)) || !this.dateSearch);
 
         //load pin on the map 
         this.mapComponent.reloadMarkers(this.crimesArray);
