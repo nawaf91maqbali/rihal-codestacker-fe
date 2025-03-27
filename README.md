@@ -67,3 +67,15 @@ A **Crimes Report System** is a software application designed to facilitate the 
    ## 🎥 Demo
 
 You can check out a demo of the Crimes Report System below:
+
+### Dashbard Page
+![Dashboard](demo/dashboard.png)
+
+### Filter Crimes
+![Search](demo/search.gif)
+
+### Dashbard Page
+![Create](demo/create.gif)
+
+### Filter Crimes
+![About](demo/about.png)
