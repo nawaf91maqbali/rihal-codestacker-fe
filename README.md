@@ -1,59 +1,69 @@
-# RihalCodestackerFe
+# 📌 Crimes Report System
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.0.
+A **Crimes Report System** is a software application designed to facilitate the reporting, tracking, and management of criminal activities. It serves law enforcement agencies, government bodies, and the general public by providing a digital platform for crime documentation, investigation, and analysis.
 
-## Development server
+## 🚀 Features
 
-To start a local development server, run:
+- **🗺️ Crime Tracking on Map** – Real map crime tracking.
+- **📝 Crime Reporting** – Allows citizens and law enforcement officers to report crimes online.
+- **📂 Case Management** – Enables authorities to track cases, assign officers, and update investigation statuses.
 
-```bash
-ng serve
-```
+## 🛠 Development Tools
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+- **Framework:** [Angular](https://angular.io/)
+- **Development Server:** [json-server](https://github.com/typicode/json-server)
+- **Component Library:** [ng-zorro-antd](https://ng.ant.design/)
+- **Mapping Library:** [ol (OpenLayers)](https://openlayers.org/)
 
-## Code scaffolding
+## 📜 Installation
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+### Run using Docker
 
-```bash
-ng generate component component-name
-```
+1. Clone the repository:
+   ```sh
+   git clone https://github.com/nawaf91maqbali/rihal-codestacker-fe.git
+   ```
+2. Navigate to the Docker setup directory:
+   ```sh
+   cd rihal-codestacker-fe/docker-example
+   ```
+3. Run the application using Docker Compose:
+   ```sh
+   docker-compose up -d
+   ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+   > ⚠️ **Warning:** If you changed the `crs_api` service port, you must update the `ApiUrl` port in the `environment.ts` file in the project before running the `docker-compose up -d` command.
+   
+   > ⚠️ **Warning:** Do not change the location of the `docker-compose.yml` file, otherwise running `docker-compose up -d` will not work.
+   
+   > ℹ️ **Info:** After running `docker-compose up -d`, if you want to check the API, visit: `http://localhost:crs_api_port` (e.g., in my case, `http://localhost:3333`).
+   
+### Run Manually
 
-```bash
-ng generate --help
-```
+1. Clone the repository:
+   ```sh
+   git clone https://github.com/nawaf91maqbali/rihal-codestacker-fe.git
+   ```
+2. Navigate to the project directory:
+   ```sh
+   cd rihal-codestacker-fe
+   ```
+3. Install dependencies:
+   ```sh
+   npm install  # Install frontend dependencies
+   npm install -g json-server  # Install JSON Server globally
+   ```
+4. Configure environment variables and database settings.
+5. Start the application:
+   ```sh
+   json-server --watch src/data/db.json  # Start JSON Server for development
+   ng serve  # Start Angular frontend
+   ```
 
-## Building
+## 📝 Note
 
-To build the project run:
+> 🚩 **Note:** The `db.json` you provided is missing one property (`national_id`), which is required when creating a new report.
 
-```bash
-ng build
-```
+   ## 🎥 Demo
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+You can check out a demo of the Crimes Report System below:
