@@ -2,6 +2,8 @@
 
 A **Crimes Report System** is a software application designed to facilitate the reporting, tracking, and management of criminal activities. It serves law enforcement agencies, government bodies, and the general public by providing a digital platform for crime documentation, investigation, and analysis.
 
+🔗 **Live Demo:** [Click here](https://crs-oman.netlify.app)
+
 ## 🚀 Features
 
 - **🗺️ Crime Tracking on Map** – Real map crime tracking.
@@ -129,3 +131,5 @@ You can check out a demo of the Crimes Report System below:
 
 ### Filter Crimes
 ![About](demo/about.png)
+
+🔗 **Live Demo:** [Click here](https://crs-oman.netlify.app)
