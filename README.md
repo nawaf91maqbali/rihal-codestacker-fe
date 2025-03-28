@@ -9,6 +9,7 @@ A **Crimes Report System** is a software application designed to facilitate the 
 - **🗺️ Crime Tracking on Map** – Real map crime tracking.
 - **📝 Crime Reporting** – Allows citizens and law enforcement officers to report crimes online.
 - **📂 Case Management** – Enables authorities to track cases, assign officers, and update investigation statuses.
+- **📱 PWA Support** – Installable as a Progressive Web App (PWA) for better accessibility and offline functionality.
 
 ## 🛠 Development Tools
 
